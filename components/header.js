@@ -9,9 +9,9 @@ export default function Header() {
         <a>Mark-T’s Study Room</a>
       </div>
       <div css={buttonStyle}>
-        <HeaderButton href={"https://threejs.org/docs/index.html#manual/en/introduction/Installation"} name={"TOP"} />
-        <HeaderButton href={"https://threejs.org/docs/index.html#manual/en/introduction/Installation"} name={"Report"} />
-        <HeaderButton href={"https://threejs.org/docs/index.html#manual/en/introduction/Installation"} name={"Tech Blog"} />
+        <HeaderButton href={"./"} name={"TOP"} />
+        <HeaderButton href={"./report"} name={"Report"} />
+        <HeaderButton href={"./"} name={"Tech Blog"} />
       </div>
     </header>
   );
