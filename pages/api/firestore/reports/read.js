@@ -40,7 +40,7 @@ const read = async (req, res) => {
         querySnapshot.forEach((doc) => {
           data.id = doc.id;
           data.date = doc.data().date.toDate().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' });
-          data.report = doc.data().report;
+          data.report = doc.data().report.replaceAll("  ","\n");
           data.count = doc.data().count;
         });
 

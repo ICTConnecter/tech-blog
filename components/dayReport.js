@@ -7,7 +7,7 @@ export default function DayReport(props) {
 
   return (
     <div css={dayReportStyle}>
-      <p>{report}</p>
+      {report}
     </div>
   );
 
@@ -16,7 +16,9 @@ const dayReportStyle = css({
   display: "flex",
   flexDirection: "column",
   justifyContent: "start",
-  alignItems: "center",
+  alignItems: "start",
   width: "450px",
   margin: "50px",
+  whiteSpace: "pre-wrap",
+  wordWrap: "break-word",
 });
