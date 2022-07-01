@@ -10,11 +10,13 @@ import { useEffect, useState } from "react";
 export default function Report() {
 
   // useState設定
+  const [count, setCount] = useState()
   const [dateValue, setDateValue] = useState(new Date());
   const [report, setReport] = useState();
   
   // Fetch処理
-  async function getData(){
+  const selectDateUrl = "./api/firestore/reports/read";
+  async function getReport(){
     var data = {
       date: dateValue
     }
@@ -26,13 +28,28 @@ export default function Report() {
       .then((r) => r.json())
       .then((j) => setReport(j.report))
   }
+  const getMaxCountUrl = "./api/firestore/reports/getNewReport";
+  async function getCount(){
+    await fetch(getMaxCountUrl, {
+      method: `GET`,
+    })
+      .then((r) => r.json())
+      .then((j) => setCount(j.count))
+  }
 
   // useEffect設定
-  const selectDateUrl = "./api/firestore/reports/read";
+
   useEffect(
     () => {
-      getData(); 
+      getReport(); 
     }, [dateValue]
+  )
+
+  var maxCount;
+  useEffect(
+    () => {
+      getCount();
+    }, []
   )
   
 
@@ -42,7 +59,7 @@ export default function Report() {
       <main>
         <Header />
         <div css={mainStyle}>
-          <HundredDaysChallenge count={5}/>
+          <HundredDaysChallenge count={count}/>
           <DatePicker onChange={setDateValue} value={dateValue}/>
           <DayReport report={report}/>
         </div>

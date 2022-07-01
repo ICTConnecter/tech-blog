@@ -4,6 +4,8 @@ import {
   collection,
   orderBy,
   limit,
+  query,
+  getDocs,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -27,8 +29,10 @@ const getNewReport = async (req, res) => {
     newReport.id = doc.id;
     newReport.count = doc.data().count;
     newReport.date = doc.data().date.toDate();
-    newReport.report = doc.data().report;
+    newReport.report = doc.data().report.replaceAll("  ","\n");
   });
   // 取得した情報をresとして返信
   res.status(200).json(newReport);
 };
+
+export default getNewReport;

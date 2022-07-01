@@ -1,4 +1,3 @@
-import { is } from "date-fns/locale";
 import { initializeApp } from "firebase/app";
 import {
   getFirestore,
@@ -23,7 +22,6 @@ const firebaseApp = initializeApp(firebaseConfig);
 const db = getFirestore(firebaseApp);
 
 const read = async (req, res) => {
-  console.log("report>readにリクエストが届きました");
   switch (req.method) {
     case "POST":
       // req.bodyから日付を受け取る
@@ -31,7 +29,6 @@ const read = async (req, res) => {
       startDate.setHours(0, 0, 0);
       var endDate = new Date(startDate);
       endDate.setDate(endDate.getDate() + 1);
-      console.log(`${startDate}から${endDate}まで`)
       // ドキュメントを取得
       var q = query(collection(db, "reports"), orderBy("date") , startAt(startDate), endBefore(endDate));
       var querySnapshot = await getDocs(q);
