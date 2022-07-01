@@ -6,27 +6,32 @@ import DatePicker from "../components/datePicker";
 import HundredDaysChallenge from "../components/hundredDaysChallenge";
 import DayReport from "../components/dayReport";
 import { useEffect, useState } from "react";
-import { async } from "@firebase/util";
 
 export default function Report() {
 
   // useState設定
   const [dateValue, setDateValue] = useState(new Date());
   const [report, setReport] = useState();
+  
+  // Fetch処理
+  async function getData(){
+    var data = {
+      date: dateValue
+    }
+    console.log(JSON.stringify(data))
+    await fetch(selectDateUrl, {
+      method: `POST`,
+      body: JSON.stringify(data),
+    })
+      .then((r) => r.json())
+      .then((j) => setReport(j.report))
+  }
 
   // useEffect設定
   const selectDateUrl = "./api/firestore/reports/read";
   useEffect(
     () => {
-      var data = {
-        date: dateValue
-      }
-      fetch(selectDateUrl, {
-        method: `POST`,
-        body: JSON.stringify(data),
-      })
-        .then((r) => r.json())
-        .then((j) => setReport(j.report))
+      getData(); 
     }, [dateValue]
   )
   

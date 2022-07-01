@@ -37,21 +37,15 @@ const read = async (req, res) => {
       var querySnapshot = await getDocs(q);
       // 取得したドキュメント情報を整理
       var data = {};
-      if(querySnapshot.empty){
-        // レコードがなかった場合の処理
-        data.report = "この日のレポートはありません";
-      } else {
-        // レコードがあった場合の処理
         querySnapshot.forEach((doc) => {
           data.id = doc.id;
           data.date = doc.data().date.toDate().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' });
           data.report = doc.data().report;
           data.count = doc.data().count;
         });
-      }
 
       // res送信
-      res.status(200).json(data[0]);
+      res.status(200).json(data);
       break;
     default:
       // ドキュメントを取得
