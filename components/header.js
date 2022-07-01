@@ -6,7 +6,7 @@ export default function Header() {
   return (
     <header css={headerStyle}>
       <div css={titleStyle}>
-        <a>Mark-T's Study Room</a>
+        <a>Mark-T’s Study Room</a>
       </div>
       <div css={buttonStyle}>
         <HeaderButton href={"https://threejs.org/docs/index.html#manual/en/introduction/Installation"} name={"TOP"} />
